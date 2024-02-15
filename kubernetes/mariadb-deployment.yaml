@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - name: mariadb
+          image: boudun/mariadb:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: yourRootPassword
+            - name: MYSQL_USER
+              value: wordpress
+            - name: MYSQL_DATABASE
+              value: wordpressUser
+            - name: MYSQL_PASSWORD
+              value: securepassword
